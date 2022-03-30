@@ -1,5 +1,6 @@
 import socket
 import sys
+import time
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -14,10 +15,10 @@ try:
 
     server_socket.listen(5)
 
-    print(f'Listening for incoming client(s) on {server_ip}:{server_port}...')
+    print(f'[{time.asctime()}] Listening for incoming client(s) on {server_ip}:{server_port}...') #ADD TIMESTAMP
     server_socket, client_address = server_socket.accept()
 except Exception as e:
-    print(f'Error. {e}')
+    print(f'[{time.asctime()}] Error. {e}') #ADD TIMESTAMP
     sys.exit()
 except KeyboardInterrupt:
     sys.exit()
@@ -25,11 +26,11 @@ else:
     client_info = server_socket.recv(1024).decode()
     client_hostname = client_info[client_info.index('Hostname:') + len('Hostname:'):client_info.index('Version')].strip()
 
-    print(f'Connection with {client_address} was succesfully established.\n{client_info}') 
+    print(f'[{time.asctime()}] Connection with {client_address} was succesfully established.\n{client_info}') #ADD TIMESTAMP
 
 try:
     while True:
-        command = input(f'{client_address} : {client_hostname} > ')
+        command = input(f'{client_address} : {client_hostname} > ') 
         server_socket.send(command.encode())
 
         if command.upper() == 'WQ':
@@ -53,7 +54,7 @@ try:
             print(full_command_output.decode())
             
 except Exception as e:
-    print(f'Error occured. {e}\nSocket was closed.')
+    print(f'[{time.asctime()}] Error occured. {e}\nSocket was closed.') #ADD TIMESTAMP
     server_socket.close()
 except KeyboardInterrupt:
     server_socket.close()

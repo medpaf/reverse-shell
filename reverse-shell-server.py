@@ -25,7 +25,7 @@ else:
     client_info = server_socket.recv(1024).decode()
     client_hostname = client_info[client_info.index('Hostname:') + len('Hostname:'):client_info.index('Version')].strip()
 
-    print(f'Connection with {client_address} was succesfully established.\n{client_info}')
+    print(f'Connection with {client_address} was succesfully established.\n{client_info}') 
 
 try:
     while True:

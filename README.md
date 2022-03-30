@@ -1,7 +1,6 @@
 # reverse-shell
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-![Size](https://img.shields.io/github/repo-size/medpaf/reverse-shell)
 
 This is a reverse shell written in Python used to to target a machine and gain remote shell access.
 

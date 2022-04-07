@@ -19,7 +19,7 @@ identifier = '<END_OF_COMMAND_OUTPUT>'
 system_os = platform.system()
 system_hostname = platform.node()
 
-system_info = f'OS: {platform.system()}\nHostname: {platform.node()}\nVersion: {platform.version()}\nRelease: {platform.release()}\nArchitecture: {platform.machine()}\nProcessor: {platform.processor()}\n'
+system_info = f'\nOS: {platform.system()}\nHostname: {platform.node()}\nVersion: {platform.version()}\nRelease: {platform.release()}\nArchitecture: {platform.machine()}\nProcessor: {platform.processor()}\n'
 
 try:
 

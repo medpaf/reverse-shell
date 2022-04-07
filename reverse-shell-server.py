@@ -1,6 +1,9 @@
 import socket
 import sys
 import time
+from colorama import Fore, Back, Style
+
+#f'[{Fore.YELLOW}?{Style.RESET_ALL}] Scanning for devices on {Fore.YELLOW}{network}{Style.RESET_ALL} network...'
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -15,10 +18,10 @@ try:
 
     server_socket.listen(5)
 
-    print(f'[{time.asctime()}] Listening for incoming client(s) on {server_ip}:{server_port}...') #ADD TIMESTAMP
+    print(f'[{time.asctime()}] [{Fore.YELLOW}?{Style.RESET_ALL}] Listening for incoming client(s) on {Fore.YELLOW}{server_ip}{Style.RESET_ALL}:{Fore.YELLOW}{server_port}{Style.RESET_ALL}...') #ADD TIMESTAMP
     server_socket, client_address = server_socket.accept()
 except Exception as e:
-    print(f'[{time.asctime()}] Error. {e}') #ADD TIMESTAMP
+    print(f'[{time.asctime()}] [{Fore.RED}!{Style.RESET_ALL}] Error. {Fore.RED}{e}{Style.RESET_ALL}') #ADD TIMESTAMP
     sys.exit()
 except KeyboardInterrupt:
     sys.exit()
@@ -26,7 +29,7 @@ else:
     client_info = server_socket.recv(1024).decode()
     client_hostname = client_info[client_info.index('Hostname:') + len('Hostname:'):client_info.index('Version')].strip()
 
-    print(f'[{time.asctime()}] Connection with {client_address} was succesfully established.\n{client_info}') #ADD TIMESTAMP
+    print(f'[{time.asctime()}] [{Fore.GREEN}+{Style.RESET_ALL}] Connection with {Fore.GREEN}{client_address}{Style.RESET_ALL} was succesfully established.\n{client_info}') #ADD TIMESTAMP
 
 try:
     while True:
@@ -35,7 +38,7 @@ try:
 
         if command.upper() == 'WQ':
             server_socket.close()
-            print('Socket closed.')
+            print(f'[{time.asctime()}] [{Fore.GREEN}+{Style.RESET_ALL}] Socket closed.')
             break
         elif command == '':
             continue
@@ -54,7 +57,7 @@ try:
             print(full_command_output.decode())
             
 except Exception as e:
-    print(f'[{time.asctime()}] Error occured. {e}\nSocket was closed.') #ADD TIMESTAMP
+    print(f'[{time.asctime()}] [{Fore.RED}!{Style.RESET_ALL}] Error occured. {Fore.RED}{e}{Style.RESET_ALL}\nSocket was closed.') #ADD TIMESTAMP
     server_socket.close()
 except KeyboardInterrupt:
     server_socket.close()

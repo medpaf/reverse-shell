@@ -29,7 +29,7 @@ else:
     client_info = server_socket.recv(1024).decode()
     client_hostname = client_info[client_info.index('Hostname:') + len('Hostname:'):client_info.index('Version')].strip()
 
-    print(f'[{time.asctime()}] [{Fore.GREEN}+{Style.RESET_ALL}] Connection with {Fore.GREEN}{client_address}{Style.RESET_ALL} was succesfully established.\n{client_info}') #ADD TIMESTAMP
+    print(f'[{time.asctime()}] [{Fore.GREEN}+{Style.RESET_ALL}] Connection with {Fore.GREEN}{client_address}{Style.RESET_ALL} was succesfully established.\n{Fore.GREEN}{client_info}{Style.RESET_ALL}') #ADD TIMESTAMP
 
 try:
     while True:
@@ -54,7 +54,7 @@ try:
                     full_command_output += chunk
                     break
                 full_command_output += chunk
-            print(full_command_output.decode())
+            print(f'{Fore.GREEN}{full_command_output.decode()}{Style.RESET_ALL}')
             
 except Exception as e:
     print(f'[{time.asctime()}] [{Fore.RED}!{Style.RESET_ALL}] Error occured. {Fore.RED}{e}{Style.RESET_ALL}\nSocket was closed.') #ADD TIMESTAMP
